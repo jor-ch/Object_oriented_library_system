@@ -25,6 +25,11 @@ public:
     // Setters
     void setAvailable(bool available) { available_ = available; }
 
+    // Pure virtual function to be implemented by derived classes
+    virtual std::string getItemType() const = 0;
+    virtual double calculateFine(int overdueDays) const = 0;
+    virtual std::string getDetails() const = 0;
+
     // methods to check out and return items
     void checkOut()
     {

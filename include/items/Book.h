@@ -15,4 +15,9 @@ public:
          const std::string &author,
          const std::string &ISBN,
          const std::string &genre);
+
+    // Getters
+    std::string getAuthor() const;
+    std::string getISBN() const;
+    std::string getGenre() const;
 };

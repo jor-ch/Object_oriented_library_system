@@ -11,3 +11,17 @@ Book::Book(const std::string &id,
     dailyFine_ = 0.50; // Example fine for overdue books
     maxLoanDays_ = 14; // Example loan period for books
 }
+
+// Getters
+std::string Book::getAuthor() const
+{
+    return author_;
+}
+std::string Book::getISBN() const
+{
+    return ISBN_;
+}
+std::string Book::getGenre() const
+{
+    return genre_;
+}

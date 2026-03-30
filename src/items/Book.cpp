@@ -25,3 +25,30 @@ std::string Book::getGenre() const
 {
     return genre_;
 }
+
+// override virtual functions
+std::string Book::getItemType() const
+{
+    return "Book";
+}
+
+double Book::calculateFine(int overdueDays) const
+{
+    if (overdueDays <= 0)
+    {
+        return 0.0;
+    }
+    return overdueDays * dailyFine_;
+}
+
+std::string Book::getDetails() const
+{
+    std::stringstream details;
+    details << getItemType() << " Details:\n"
+            << "ID: " << id_ << "\n"
+            << "Title: " << title_ << "\n"
+            << "Author: " << author_ << "\n"
+            << "ISBN: " << ISBN_ << "\n"
+            << "Genre: " << genre_ << "\n";
+    return details.str();
+}

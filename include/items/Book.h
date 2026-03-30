@@ -20,4 +20,9 @@ public:
     std::string getAuthor() const;
     std::string getISBN() const;
     std::string getGenre() const;
+
+    // override virtual functions
+    std::string getItemType() const override;
+    double calculateFine(int overdueDays) const override;
+    std::string getDetails() const override;
 };

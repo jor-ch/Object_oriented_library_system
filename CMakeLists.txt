@@ -1,16 +1,18 @@
 cmake_minimum_required(VERSION 3.16)
-project(library_system)
+project(LibrarySystem)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(SOURCES
-main.cpp
-#anagram_checker.cpp
+#Include header files
+include_directories(include)
+
+#All source files
+file(GLOB_RECURSE SOURCES
+    src/*.cpp
 )
 
-set(HEADERS
-#includes/utilities.h
+#Create executable
+add_executable(LibrarySystem
+    main.cpp
+    ${SOURCES}
 )
-
-add_executable(library_system
-${SOURCES}
-${HEADERS})

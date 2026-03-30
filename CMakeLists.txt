@@ -4,7 +4,11 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 #Include header files
-include_directories(include)
+include_directories(include
+include/items
+include/patrons
+include/transactions
+include/core)
 
 #All source files
 file(GLOB_RECURSE SOURCES

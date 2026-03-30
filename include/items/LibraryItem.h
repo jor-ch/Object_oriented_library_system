@@ -16,6 +16,16 @@ public:
 
     virtual ~LibraryItem() = default;
 
+    // Getters
+    std::string getId() const { return id_; }
+    std::string getTitle() const { return title_; }
+    bool isAvailable() const { return available_; }
+    double getMaxLoanDays() const { return maxLoanDays_; }
+
+    // Setters
+    void setAvailable(bool available) { available_ = available; }
+
+    // methods to check out and return items
     void checkOut()
     {
         if (!available_)

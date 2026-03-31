@@ -15,4 +15,8 @@ public:
             const std::string &major);
     std::string getStudentId() const;
     std::string getMajor() const;
+
+    // Implement virtual functions from LibraryPatron
+    std::string getPatronType() const override;
+    int getLoanExtensionDays() const override;
 };

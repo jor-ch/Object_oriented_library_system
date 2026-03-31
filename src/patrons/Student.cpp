@@ -18,3 +18,13 @@ std::string Student::getMajor() const
 {
     return major_;
 }
+
+std::string Student::getPatronType() const
+{
+    return "Student";
+}
+
+int Student::getLoanExtensionDays() const
+{
+    return 7; // Students can extend loans by 7 days
+}

@@ -13,4 +13,6 @@ public:
             const std::string &contact,
             const std::string &studentId,
             const std::string &major);
+    std::string getStudentId() const;
+    std::string getMajor() const;
 };

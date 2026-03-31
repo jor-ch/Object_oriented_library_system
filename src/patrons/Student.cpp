@@ -8,3 +8,13 @@ Student::Student(const std::string &id,
 {
     maxBorrowItems_ = 5; // Students can borrow up to 5 items
 }
+
+std::string Student::getStudentId() const
+{
+    return studentId_;
+}
+
+std::string Student::getMajor() const
+{
+    return major_;
+}

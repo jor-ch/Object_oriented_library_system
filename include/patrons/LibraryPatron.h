@@ -15,4 +15,11 @@ public:
                   const std::string &name,
                   const std::string &contact) : id_(id), name_(name), contactInfo_(contact), active_(true), maxBorrowItems_(0){};
     virtual ~LibraryPatron() = default;
+
+    // Getters
+    std::string getId() const { return id_; }
+    std::string getName() const { return name_; }
+    std::string getContactInfo() const { return contactInfo_; }
+    bool isActive() const { return active_; }
+    int getMaxBorrowItems() const { return maxBorrowItems_; }
 };

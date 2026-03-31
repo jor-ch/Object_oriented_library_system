@@ -22,4 +22,16 @@ public:
     std::string getContactInfo() const { return contactInfo_; }
     bool isActive() const { return active_; }
     int getMaxBorrowItems() const { return maxBorrowItems_; }
+
+    // setters
+    void setActive(bool active) { active_ = active; }
+    void setContactInfo(const std::string &contact) { contactInfo_ = contact; }
+
+    // virtual functions for derived classes to implement
+    virtual std::string getPatronType() const = 0;
+    virtual int getLoanExtensionDays() const = 0;
+
+    // common functions
+    void deactivate() { active_ = false; }
+    void activate() { active_ = true; }
 };

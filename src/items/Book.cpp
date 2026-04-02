@@ -43,12 +43,8 @@ double Book::calculateFine(int overdueDays) const
 
 std::string Book::getDetails() const
 {
-    std::stringstream details;
-    details << getItemType() << " Details:\n"
-            << "ID: " << id_ << "\n"
-            << "Title: " << title_ << "\n"
-            << "Author: " << author_ << "\n"
-            << "ISBN: " << ISBN_ << "\n"
-            << "Genre: " << genre_ << "\n";
-    return details.str();
+    return "Library item: " + getItemType() + " Details:\nID: " + id_ +
+           "\nTitle: " + title_ + "\nAuthor: " + author_ + "\nISBN: " + ISBN_ +
+           "\nGenre: " + genre_ + "\nAvailable: " + (available_ ? "Yes" : "No") +
+           "\nMax Loan Days: " + std::to_string(maxLoanDays_) + "\nDaily Fine: $" + std::to_string(dailyFine_);
 }

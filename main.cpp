@@ -40,15 +40,7 @@ int main()
 
     // for testing of student and library patron functionality
     Student student("ID456", "Best name", "best.name@example.com", "SID123456", "Computer Science");
-    std::cout << "Student Name: " << student.getName() << std::endl;
-    std::cout << "Student ID: " << student.getStudentId() << std::endl;
-    std::cout << "Student Major: " << student.getMajor() << std::endl;
-    std::cout << "Student Contact Info: " << student.getContactInfo() << std::endl;
-    std::cout << "ID: " << student.getId() << std::endl;
-    std::cout << "Is the student active? " << (student.isActive() ? "Yes" : "No") << std::endl;
-    std::cout << "Max borrow items: " << student.getMaxBorrowItems() << std::endl;
-    std::cout << "Patron Type: " << student.getPatronType() << std::endl;
-    std::cout << "Loan extension days: " << student.getLoanExtensionDays() << std::endl;
+    std::cout << student.getDetails() << std::endl;
     student.deactivate();
     std::cout << "Is the student active after deactivation? " << (student.isActive() ? "Yes" : "No") << std::endl;
     student.activate();

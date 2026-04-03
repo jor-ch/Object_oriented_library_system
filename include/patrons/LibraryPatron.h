@@ -30,6 +30,7 @@ public:
     // virtual functions for derived classes to implement
     virtual std::string getPatronType() const = 0;
     virtual int getLoanExtensionDays() const = 0;
+    virtual std::string getDetails() const = 0;
 
     // common functions
     void deactivate() { active_ = false; }

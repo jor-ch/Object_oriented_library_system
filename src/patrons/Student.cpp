@@ -28,3 +28,11 @@ int Student::getLoanExtensionDays() const
 {
     return 7; // Students can extend loans by 7 days
 }
+
+std::string Student::getDetails() const
+{
+    return "Patron Type: " + getPatronType() + "\nID: " + id_ + "\nName: " + name_ +
+           "\nContact Info: " + contactInfo_ + "\nStudent ID: " + studentId_ +
+           "\nMajor: " + major_ + "\nActive: " + (active_ ? "Yes" : "No") +
+           "\nMax Borrow Items: " + std::to_string(maxBorrowItems_);
+}

@@ -19,4 +19,5 @@ public:
     // Implement virtual functions from LibraryPatron
     std::string getPatronType() const override;
     int getLoanExtensionDays() const override;
+    std::string getDetails() const override;
 };

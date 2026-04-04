@@ -9,6 +9,7 @@
 #include "Faculty.h"
 #include "Guest.h"
 #include "Return.h"
+#include "Reservation.h"
 
 int main()
 {
@@ -85,33 +86,51 @@ int main()
     //           << guest1.getDetails() << std::endl;
 
     // test functionality of checkout and return transactions with different item and patron types
-    std::shared_ptr<LibraryItem> dvd2 = std::make_shared<DVD>("7777", "Another Great DVD", "Another Great Director", 90);
-    std::shared_ptr<LibraryPatron> faculty2 = std::make_shared<Faculty>("6666", "Another Great Faculty", "another.faculty@example.com", "FAC654321", "Mathematics");
+    // std::shared_ptr<LibraryItem> dvd2 = std::make_shared<DVD>("7777", "Another Great DVD", "Another Great Director", 90);
+    // std::shared_ptr<LibraryPatron> faculty2 = std::make_shared<Faculty>("6666", "Another Great Faculty", "another.faculty@example.com", "FAC654321", "Mathematics");
+    // std::vector<std::shared_ptr<Transaction>> transactions;
+    // try
+    // {
+    //     std::shared_ptr<Checkout> checkout2 = std::make_shared<Checkout>(dvd2, faculty2);
+    //     transactions.push_back(checkout2);
+    //     std::cout << "Checkout successful:\n"
+    //               << checkout2->getDetails() << std::endl;
+
+    //     std::cout << "item details in checkout procedure are:\n"
+    //               << checkout2->getItem()->getDetails() << std::endl;
+    //     std::cout << "patron details in checkout procedure are:\n"
+    //               << checkout2->getPatron()->getDetails() << std::endl;
+    // }
+    // catch (const std::exception &e)
+    // {
+    //     std::cerr << "Error: " << e.what() << std::endl;
+    // }
+    // // simulate returning the DVD with a fine for overdue days
+    // std::shared_ptr<Return> return2 = std::make_shared<Return>(faculty2, dvd2);
+    // transactions.push_back(return2);
+    // int overdueDays = 10; // example overdue days for DVD
+    // double fine = dvd2->calculateFine(overdueDays);
+    // std::cout << "Return successful:" << std::endl;
+    // std::cout << return2->getDetails() << std::endl;
+    // std::cout << "DVD returned. Overdue days: " << overdueDays << ", Fine: $" << fine << std::endl;
+
+    // test functionality of reservation transaction
+    std::shared_ptr<LibraryItem> book = std::make_shared<Book>("4321", "Another Great Book",
+                                                               "Another Great Author", "0987654321", "Non-Fiction");
+    std::shared_ptr<LibraryPatron> student = std::make_shared<Student>("8765", "Another Great Student",
+                                                                       "another.student@example.com", "STU654321", "Computer Science");
     std::vector<std::shared_ptr<Transaction>> transactions;
     try
     {
-        std::shared_ptr<Checkout> checkout2 = std::make_shared<Checkout>(dvd2, faculty2);
-        transactions.push_back(checkout2);
-        std::cout << "Checkout successful:\n"
-                  << checkout2->getDetails() << std::endl;
-
-        std::cout << "item details in checkout procedure are:\n"
-                  << checkout2->getItem()->getDetails() << std::endl;
-        std::cout << "patron details in checkout procedure are:\n"
-                  << checkout2->getPatron()->getDetails() << std::endl;
+        std::shared_ptr<Reservation> reservation1 = std::make_shared<Reservation>(book, student);
+        transactions.push_back(reservation1);
+        std::cout << "Reservation successful:\n"
+                  << reservation1->getDetails() << std::endl;
     }
     catch (const std::exception &e)
     {
         std::cerr << "Error: " << e.what() << std::endl;
     }
-    // simulate returning the DVD with a fine for overdue days
-    std::shared_ptr<Return> return2 = std::make_shared<Return>(faculty2, dvd2);
-    transactions.push_back(return2);
-    int overdueDays = 10; // example overdue days for DVD
-    double fine = dvd2->calculateFine(overdueDays);
-    std::cout << "Return successful:" << std::endl;
-    std::cout << return2->getDetails() << std::endl;
-    std::cout << "DVD returned. Overdue days: " << overdueDays << ", Fine: $" << fine << std::endl;
 
     return 0;
 }

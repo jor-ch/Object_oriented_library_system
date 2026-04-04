@@ -5,6 +5,7 @@
 #include "Checkout.h"
 #include <vector>
 #include "Magazine.h"
+#include "DVD.h"
 
 int main()
 {
@@ -64,5 +65,10 @@ int main()
               << mag1.getDetails() << std::endl;
     std::cout << "test fine for 3 days is $" << mag1.calculateFine(3) << std::endl; // example overdue days for magazine
 
+    // test functionality of DVD class
+    DVD dvd1("8888", "The Best DVD", "Best Director", 120);
+    std::cout << "DVD details:\n"
+              << dvd1.getDetails() << std::endl;
+    std::cout << "test fine for 8 days is $" << dvd1.calculateFine(8) << std::endl; // example overdue days for DVD
     return 0;
 }

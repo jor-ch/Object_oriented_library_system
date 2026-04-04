@@ -1,5 +1,4 @@
 #include "Checkout.h"
-#include <sstream>
 #include <stdexcept>
 #include <iomanip>
 #include <chrono>
@@ -48,14 +47,12 @@ std::string Checkout::getTransactionType() const
 
 std::string Checkout::getDetails() const
 {
-    std::stringstream details;
-    details << "Transaction ID: " << transactionId_ << "\n"
-            << "Transaction Type: " << getTransactionType() << "\n"
-            << "Timestamp: " << getFormattedTimestamp() << "\n"
-            << "Item: " << item_->getTitle() << " (ID: " << item_->getId() << ")\n"
-            << "Patron: " << patron_->getName() << " (ID: " << patron_->getId() << ")\n"
-            << "Due Date: " << getFormattedDueDate();
-    return details.str();
+    return "Transaction ID: " + transactionId_ +
+           "\n" + "Transaction Type: " + getTransactionType() +
+           "\n" + "Timestamp: " + getFormattedTimestamp() +
+           "\n" + "Item: " + item_->getTitle() + " (ID: " + item_->getId() + ")\n" +
+           "Patron: " + patron_->getName() + " (ID: " + patron_->getId() + ")\n" +
+           "Due Date: " + getFormattedDueDate();
 }
 
 std::string Checkout::getFormattedDueDate() const

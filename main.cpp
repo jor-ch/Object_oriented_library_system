@@ -6,6 +6,7 @@
 #include <vector>
 #include "Magazine.h"
 #include "DVD.h"
+#include "Faculty.h"
 
 int main()
 {
@@ -70,5 +71,11 @@ int main()
     std::cout << "DVD details:\n"
               << dvd1.getDetails() << std::endl;
     std::cout << "test fine for 8 days is $" << dvd1.calculateFine(8) << std::endl; // example overdue days for DVD
+
+    // test functionality of faculty patron class
+    Faculty faculty1("5555", "Best Faculty", "best.faculty@example.com", "FAC123456", "Computer Science");
+    std::cout << "Faculty details:\n"
+              << faculty1.getDetails() << std::endl;
+
     return 0;
 }

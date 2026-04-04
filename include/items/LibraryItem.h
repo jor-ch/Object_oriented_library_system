@@ -20,7 +20,7 @@ public:
     std::string getId() const { return id_; }
     std::string getTitle() const { return title_; }
     bool isAvailable() const { return available_; }
-    double getMaxLoanDays() const { return maxLoanDays_; }
+    int getMaxLoanDays() const { return maxLoanDays_; }
 
     // Setters
     void setAvailable(bool available) { available_ = available; }

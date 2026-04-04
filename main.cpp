@@ -7,6 +7,7 @@
 #include "Magazine.h"
 #include "DVD.h"
 #include "Faculty.h"
+#include "Guest.h"
 
 int main()
 {
@@ -76,6 +77,11 @@ int main()
     Faculty faculty1("5555", "Best Faculty", "best.faculty@example.com", "FAC123456", "Computer Science");
     std::cout << "Faculty details:\n"
               << faculty1.getDetails() << std::endl;
+
+    // test functionality of guest patron class
+    Guest guest1("9999", "Best Guest", "best.guest@example.com");
+    std::cout << "Guest details:\n"
+              << guest1.getDetails() << std::endl;
 
     return 0;
 }

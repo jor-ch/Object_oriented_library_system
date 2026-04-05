@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <stdexcept>
+#include <iostream>
+#include "LibraryExceptions.h"
 
 class LibraryItem
 {
@@ -35,7 +37,7 @@ public:
     {
         if (!available_)
         {
-            throw std::runtime_error("Item is not available for checkout.");
+            throw LibraryException("Item is not available for checkout.");
         }
         available_ = false;
     }

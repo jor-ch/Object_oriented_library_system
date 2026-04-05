@@ -1,9 +1,6 @@
-#include <iostream>
 #include "Book.h"
 #include "Student.h"
-#include <memory>
 #include "Checkout.h"
-#include <vector>
 #include "Magazine.h"
 #include "DVD.h"
 #include "Faculty.h"
@@ -11,126 +8,129 @@
 #include "Return.h"
 #include "Reservation.h"
 
+#include "Library.h"
+#include "LibraryExceptions.h"
+
+#include <iostream>
+#include <memory>
+#include <vector>
+
 int main()
 {
-    // to test interaction functionality between checkout, book and patron
-    // std::shared_ptr<LibraryItem> book1 = std::make_shared<Book>("1234", "The Best Book 1",
-    //                                                             "The best author", "1234567890", "Fiction");
-    // std::shared_ptr<LibraryPatron> student1 = std::make_shared<Student>("9876", "Best person",
-    //                                                                     "best.person@example.com",
-    //                                                                     "ID123456", "Computer Science");
+    Library library;
 
-    // std::vector<std::shared_ptr<Transaction>> transactions;
+    // Create and add items
+    auto book1 = std::make_unique<Book>("B001", "The best book 1", "Best Author 1", "ISBN BOOK", "Fiction");
+    auto book2 = std::make_unique<Book>("B002", "The best book 2", "Best Author 2", "ISBN BOOK2", "Nonfiction");
+    auto magazine1 = std::make_unique<Magazine>("M001", "The best magazine 1", 5, "Best Publisher 1");
+    auto dvd1 = std::make_unique<DVD>("D001", "The best DVD 1", "Best Director 1", 120);
+    library.addItem(std::move(book1));
+    library.addItem(std::move(book2));
+    library.addItem(std::move(magazine1));
+    library.addItem(std::move(dvd1));
 
-    // try
-    // {
-    //     // this should work and print the details of the checkout transaction
-    //     std::shared_ptr<Checkout> checkout1 = std::make_shared<Checkout>(book1, student1);
-    //     transactions.push_back(checkout1);
-    //     std::cout << "Checkout successful:\n"
-    //               << checkout1->getDetails() << std::endl;
+    // Create and add patrons
+    auto student1 = std::make_unique<Student>("S001", "Alice", "alice@email.com", "STU123", "Computer Science");
+    auto faculty1 = std::make_unique<Faculty>("F001", "Dr. Smith", "dr.smith@email.com", "FAC456", "Computer Science");
+    auto guest1 = std::make_unique<Guest>("G001", "Bob", "bob@email.com");
+    library.addPatron(std::move(student1));
+    library.addPatron(std::move(faculty1));
+    library.addPatron(std::move(guest1));
 
-    //     std::cout << "item details in checkout procedure are:\n"
-    //               << checkout1->getItem()->getDetails() << std::endl;
-    //     std::cout << "patron details in checkout procedure are:\n"
-    //               << checkout1->getPatron()->getDetails() << std::endl;
-    // }
-    // catch (const std::exception &e)
-    // {
-    //     std::cerr << "Error: " << e.what() << std::endl;
-    // }
-    // try
-    // {
-    //     // this should NOT work because the book is already checked out, and should throw an exception
-    //     std::shared_ptr<Checkout> checkout2 = std::make_shared<Checkout>(book1, student1);
-    //     transactions.push_back(checkout2);
-    //     std::cout << "Checkout successful:\n"
-    //               << checkout2->getDetails() << std::endl;
+    // Print initial inventory
+    std::cout << "Initial Library Inventory:" << std::endl;
+    library.printInventory();
+    std::cout << std::endl;
 
-    //     std::cout << "item details in checkout procedure are:\n"
-    //               << checkout2->getItem()->getDetails() << std::endl;
-    //     std::cout << "patron details in checkout procedure are:\n"
-    //               << checkout2->getPatron()->getDetails() << std::endl;
-    // }
-    // catch (const std::exception &e)
-    // {
-    //     std::cerr << "Error: " << e.what() << std::endl;
-    // }
+    // Search for a book by title
+    std::cout << "\nSearching for books with 'best' in the title:" << std::endl;
+    auto foundBooks = library.searchItems([](const LibraryItem &item)
+                                          { return item.getTitle().find("best") != std::string::npos; });
+    for (auto *item : foundBooks)
+    {
+        std::cout << item->getDetails() << std::endl;
+    }
+    std::cout << std::endl;
 
-    // // to simulate returning the book, with a fine for overdue days
-    // book1->returnItem();
-    // int overdueDays = 5; // example overdue days
-    // double fine = book1->calculateFine(overdueDays);
-    // std::cout << "Book returned. Overdue days: " << overdueDays << ", Fine: $" << fine << std::endl;
-
-    // test functionality of magazine class
-    // Magazine mag1("5678", "The Best Magazine", 42, "Best Publisher");
-    // std::cout << "Magazine details:\n"
-    //           << mag1.getDetails() << std::endl;
-    // std::cout << "test fine for 3 days is $" << mag1.calculateFine(3) << std::endl; // example overdue days for magazine
-
-    // // test functionality of DVD class
-    // DVD dvd1("8888", "The Best DVD", "Best Director", 120);
-    // std::cout << "DVD details:\n"
-    //           << dvd1.getDetails() << std::endl;
-    // std::cout << "test fine for 8 days is $" << dvd1.calculateFine(8) << std::endl; // example overdue days for DVD
-
-    // // test functionality of faculty patron class
-    // Faculty faculty1("5555", "Best Faculty", "best.faculty@example.com", "FAC123456", "Computer Science");
-    // std::cout << "Faculty details:\n"
-    //           << faculty1.getDetails() << std::endl;
-
-    // // test functionality of guest patron class
-    // Guest guest1("9999", "Best Guest", "best.guest@example.com");
-    // std::cout << "Guest details:\n"
-    //           << guest1.getDetails() << std::endl;
-
-    // test functionality of checkout and return transactions with different item and patron types
-    // std::shared_ptr<LibraryItem> dvd2 = std::make_shared<DVD>("7777", "Another Great DVD", "Another Great Director", 90);
-    // std::shared_ptr<LibraryPatron> faculty2 = std::make_shared<Faculty>("6666", "Another Great Faculty", "another.faculty@example.com", "FAC654321", "Mathematics");
-    // std::vector<std::shared_ptr<Transaction>> transactions;
-    // try
-    // {
-    //     std::shared_ptr<Checkout> checkout2 = std::make_shared<Checkout>(dvd2, faculty2);
-    //     transactions.push_back(checkout2);
-    //     std::cout << "Checkout successful:\n"
-    //               << checkout2->getDetails() << std::endl;
-
-    //     std::cout << "item details in checkout procedure are:\n"
-    //               << checkout2->getItem()->getDetails() << std::endl;
-    //     std::cout << "patron details in checkout procedure are:\n"
-    //               << checkout2->getPatron()->getDetails() << std::endl;
-    // }
-    // catch (const std::exception &e)
-    // {
-    //     std::cerr << "Error: " << e.what() << std::endl;
-    // }
-    // // simulate returning the DVD with a fine for overdue days
-    // std::shared_ptr<Return> return2 = std::make_shared<Return>(faculty2, dvd2);
-    // transactions.push_back(return2);
-    // int overdueDays = 10; // example overdue days for DVD
-    // double fine = dvd2->calculateFine(overdueDays);
-    // std::cout << "Return successful:" << std::endl;
-    // std::cout << return2->getDetails() << std::endl;
-    // std::cout << "DVD returned. Overdue days: " << overdueDays << ", Fine: $" << fine << std::endl;
-
-    // test functionality of reservation transaction
-    std::shared_ptr<LibraryItem> book = std::make_shared<Book>("4321", "Another Great Book",
-                                                               "Another Great Author", "0987654321", "Non-Fiction");
-    std::shared_ptr<LibraryPatron> student = std::make_shared<Student>("8765", "Another Great Student",
-                                                                       "another.student@example.com", "STU654321", "Computer Science");
-    std::vector<std::shared_ptr<Transaction>> transactions;
+    std::cout << "moving on to checking out" << std::endl;
+    // Test valid checkout
     try
     {
-        std::shared_ptr<Reservation> reservation1 = std::make_shared<Reservation>(book, student);
-        transactions.push_back(reservation1);
-        std::cout << "Reservation successful:\n"
-                  << reservation1->getDetails() << std::endl;
+        auto checkout1 = library.checkOutItem("B001", "S001");
+        library.getLatestTransaction();
+        // std::cout << checkout1->getDetails() << std::endl;
     }
-    catch (const std::exception &e)
+    catch (const LibraryException &e)
     {
-        std::cerr << "Error: " << e.what() << std::endl;
+        std::cerr << "Library error: " << e.what() << std::endl;
     }
+    std::cout << std::endl;
+
+    std::cout << "moving on to invalid checking out" << std::endl;
+    // Test invalid checkout (already checked out)
+    try
+    {
+        auto checkout2 = library.checkOutItem("B001", "F001");
+        // std::cout << checkout2->getDetails() << std::endl;
+        library.getLatestTransaction();
+    }
+    catch (const LibraryException &e)
+    {
+        std::cerr << "Expected error (double checkout): " << e.what() << std::endl;
+    }
+    std::cout << std::endl;
+
+    std::cout << "moving on to checking out using inactive patron" << std::endl;
+    // Test checkout with inactive patron
+    // first, find a faulty patron
+    auto foundPatron = library.searchPatrons([](const LibraryPatron &patron)
+                                             { return patron.getPatronType().find("Faculty") != std::string::npos; });
+    foundPatron[0]->setActive(0);
+    std::cout << "patron found with ID:" << foundPatron[0]->getDetails() << std::endl;
+    std::cout << std::endl;
+    try
+    {
+        auto checkout3 = library.checkOutItem("B002", "F001");
+        // std::cout << checkout3->getDetails() << std::endl;
+        library.getLatestTransaction();
+    }
+    catch (const LibraryException &e)
+    {
+        std::cerr << "Expected error (inactive patron): " << e.what() << std::endl;
+    }
+    std::cout << std::endl;
+
+    // Test return
+    std::cout << "moving on to returning" << std::endl;
+    try
+    {
+        auto return1 = library.returnItem("B001");
+        // std::cout << return1->getDetails() << std::endl;
+        library.getLatestTransaction();
+    }
+    catch (const LibraryException &e)
+    {
+        std::cerr << "Library error: " << e.what() << std::endl;
+    }
+    std::cout << std::endl;
+
+    // Test return of item not checked out
+    std::cout << "moving on to returning of item not checked out" << std::endl;
+    try
+    {
+        auto return2 = library.returnItem("M001");
+        // std::cout << return2->getDetails() << std::endl;
+        library.getLatestTransaction();
+    }
+    catch (const LibraryException &e)
+    {
+        std::cerr << "Expected error (return not checked out): " << e.what() << std::endl;
+    }
+    std::cout << std::endl;
+
+    // Print final inventory
+    std::cout << "Final Library Inventory:" << std::endl;
+    library.printInventory();
 
     return 0;
 }

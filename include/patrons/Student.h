@@ -1,3 +1,4 @@
+#pragma once
 #include "LibraryPatron.h"
 #include <string>
 

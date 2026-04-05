@@ -1,17 +1,16 @@
 #include "Reservation.h"
 
-Reservation::Reservation(std::shared_ptr<LibraryItem> item,
-                         std::shared_ptr<LibraryPatron> patron)
+Reservation::Reservation(LibraryItem *item, LibraryPatron *patron)
     : item_(item), patron_(patron)
 {
 }
 
-std::shared_ptr<LibraryItem> Reservation::getItem() const
+LibraryItem *Reservation::getItem() const
 {
     return item_;
 }
 
-std::shared_ptr<LibraryPatron> Reservation::getPatron() const
+LibraryPatron *Reservation::getPatron() const
 {
     return patron_;
 }

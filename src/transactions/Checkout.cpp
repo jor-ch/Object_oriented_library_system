@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <chrono>
 
-Checkout::Checkout(std::shared_ptr<LibraryItem> item, std::shared_ptr<LibraryPatron> patron) : item_(item), patron_(patron)
+Checkout::Checkout(LibraryItem *item, LibraryPatron *patron) : item_(item), patron_(patron)
 {
     if (!item_ || !patron_)
     {
@@ -25,12 +25,12 @@ Checkout::Checkout(std::shared_ptr<LibraryItem> item, std::shared_ptr<LibraryPat
     dueDate_ = std::chrono::system_clock::now() + std::chrono::hours(24 * item_->getMaxLoanDays());
 }
 
-std::shared_ptr<LibraryItem> Checkout::getItem() const
+LibraryItem *Checkout::getItem() const
 {
     return item_;
 }
 
-std::shared_ptr<LibraryPatron> Checkout::getPatron() const
+LibraryPatron *Checkout::getPatron() const
 {
     return patron_;
 }

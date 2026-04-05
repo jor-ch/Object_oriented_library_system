@@ -1,16 +1,16 @@
 #include "Return.h"
 
-Return::Return(std::shared_ptr<LibraryPatron> patron, std::shared_ptr<LibraryItem> item)
+Return::Return(LibraryPatron *patron, LibraryItem *item)
     : patron_(patron), item_(item)
 {
     item->returnItem();
 }
-std::shared_ptr<LibraryPatron> Return::getPatron() const
+LibraryPatron *Return::getPatron() const
 {
     return patron_;
 }
 
-std::shared_ptr<LibraryItem> Return::getItem() const
+LibraryItem *Return::getItem() const
 {
     return item_;
 }

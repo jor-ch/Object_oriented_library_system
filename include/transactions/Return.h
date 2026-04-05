@@ -7,13 +7,13 @@
 class Return : public Transaction
 {
 private:
-    std::shared_ptr<LibraryPatron> patron_;
-    std::shared_ptr<LibraryItem> item_;
+    LibraryPatron* patron_;
+    LibraryItem* item_;
 
 public:
-    Return(std::shared_ptr<LibraryPatron> patron, std::shared_ptr<LibraryItem> item);
-    std::shared_ptr<LibraryPatron> getPatron() const;
-    std::shared_ptr<LibraryItem> getItem() const;
+    Return(LibraryPatron* patron, LibraryItem* item);
+    LibraryPatron* getPatron() const;
+    LibraryItem* getItem() const;
 
     std::string getTransactionType() const override;
     std::string getDetails() const override;

@@ -13,6 +13,7 @@ private:
 
 public:
     Checkout(LibraryItem *item, LibraryPatron *patron);
+    // no need destructor since Checkout does not own the LibraryPatron and LibraryItem
     LibraryItem *getItem() const;
     LibraryPatron *getPatron() const;
     std::chrono::system_clock::time_point getDueDate() const;

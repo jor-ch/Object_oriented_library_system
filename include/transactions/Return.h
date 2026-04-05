@@ -14,6 +14,7 @@ public:
     Return(LibraryPatron* patron, LibraryItem* item);
     LibraryPatron* getPatron() const;
     LibraryItem* getItem() const;
+    // no need destructor since Return does not own the LibraryPatron and LibraryItem
 
     std::string getTransactionType() const override;
     std::string getDetails() const override;
